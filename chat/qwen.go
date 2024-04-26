@@ -95,6 +95,8 @@ func (chat *QwenChat) chat(userId string, message string) (res string) {
 	// 如果设置了环境变量且合法，则增加maxTokens参数，否则不设置
 	if chat.maxTokens > 0 {
 		qwenReq.Parameters.MaxTokens = chat.maxTokens // 参数名称参考：https://help.aliyun.com/zh/dashscope/developer-reference/api-details
+	}else{
+		qwenReq.Parameters.MaxTokens = 2000
 	}
 	qwenReq.Parameters.TopP = 0.8; // 通义千问要求top_p ∈ (0,1)
 	qwenReq.Parameters.RepetitionPenalty = 1.1; // 用于控制模型生成时的重复度，需要大于0。提高repetition_penalty时可以降低模型生成的重复度。1.0表示不做惩罚。默认为1.1。
